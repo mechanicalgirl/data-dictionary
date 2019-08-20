@@ -1,0 +1,11 @@
+{
+  "local": {
+    "postgres": {
+      "dbname": "",
+      "host": "",
+      "password": "",
+      "user": "",
+      "port":
+    }
+  }
+}

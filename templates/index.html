@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>Home - Table of Contents</title>
+  </head>
+  <body>
+    <ul>
+      {% for link in links %}
+        <li><a href="/pages/{{ link['link'] }}">{{ link['label'] }}</a></li>
+      {% endfor %}
+  </body>
+</html>

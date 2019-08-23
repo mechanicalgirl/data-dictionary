@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title>Datasets in: {{ database }}:{{ project }}</title>
+  </head>
+  <body>
+    <h1>Datasets in: {{ database }}:{{ project }}</h1>
+    <ul>
+      {% for link in links %}
+        <li><a href="/{{ database }}/project/{{ project }}/dataset/{{ link['link'] }}/">{{ link['label'] }}</a></li>
+      {% endfor %}
+  </body>
+</html>

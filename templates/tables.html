@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>
+      Tables in: {{ database }}:{{ project }}{% if dataset %}:{{ dataset }}{% endif %}
+  </title>
+  </head>
+  <body>
+    <h1>Tables in: {{ database }}:{{ project }}{% if dataset %}:{{ dataset }}{% endif %}</h1>
+    <ul>
+      {% for link in links %}
+        <li><a href="/{{ database }}/project/{{ project }}/{% if dataset %}dataset/{{ dataset }}/{% endif %}table/{{ link['link'] }}/">{{ link['label'] }}</a></li>
+      {% endfor %}
+  </body>
+</html>

@@ -8,6 +8,7 @@
 import argparse
 import logging
 import os
+import re
 import sys
 
 from google.cloud import bigquery
@@ -26,9 +27,12 @@ def traverse_postgresql():
     if os.path.exists(folder_project):
         for root, dirs, files in os.walk(folder_project, topdown=False):
             for name in files:
+                logging.info("Clearing file: %s" % name)
                 os.remove(os.path.join(root, name))
             for name in dirs:
+                logging.info("Clearing folder: %s" % name)
                 os.rmdir(os.path.join(root, name))
+        logging.info("Clearing folder: %s" % folder_project)
         os.rmdir(folder_project)
     os.makedirs(folder_project)
 
@@ -36,10 +40,13 @@ def traverse_postgresql():
 
     logging.info("Project: %s" % project)
 
+    # TODO: work on a better way to distinguish parent
+    # from child tables - this is an incomplete solution
     LIST_TABLES = """
     SELECT table_name
     FROM information_schema.tables
     WHERE table_schema = 'public' AND table_type != 'VIEW'
+    AND table_name NOT LIKE 'fl_mt_%'
     ORDER BY table_name;
     """
 
@@ -105,6 +112,7 @@ def traverse_bigquery():
                 with open(filename, 'w+') as f:
                     f.write(project + "\n")
     else:
+        # if the list file doesn't exist, create it
         with open(filename, 'w+') as f:
             f.write(project + "\n")
 
@@ -112,9 +120,12 @@ def traverse_bigquery():
     if os.path.exists(folder_project):
         for root, dirs, files in os.walk(folder_project, topdown=False):
             for name in files:
+                logging.info("Clearing file: %s" % name)
                 os.remove(os.path.join(root, name))
             for name in dirs:
+                logging.info("Clearing folder: %s" % name)
                 os.rmdir(os.path.join(root, name))
+        logging.info("Clearing folder: %s" % folder_project)
         os.rmdir(folder_project)
     os.makedirs(folder_project)
 
@@ -129,7 +140,21 @@ def traverse_bigquery():
             logging.info("Dataset: %s" % dataset_id)
 
             tables = list(client.list_tables(dataset))  # API request(s)
+
+            # strip out partitions
             if tables:
+                table_objs = []
+                table_names = []
+                for t in tables:
+                    match = re.search(r'(_\d{8})$', t.table_id)
+                    if match:
+                        if not t.table_id[:-9] in table_names:
+                            table_names.append(t.table_id[:-9])
+                            table_objs.append((t.table_id[:-9], t))
+                    else:
+                        table_names.append(t.table_id)
+                        table_objs.append((t.table_id, t))
+
                 # only make the dataset folder if there are tables in it
                 folder_dataset = folder_project + '/' + dataset_id
                 if not os.path.exists(folder_dataset):
@@ -137,18 +162,19 @@ def traverse_bigquery():
                 dataset_list.append(dataset_id)
 
                 table_list = []
-                for t in tables:
-                    table_ref = dataset_ref.table(t.table_id)
+                for t in table_objs:
+                    table_ref = dataset_ref.table(t[1].table_id)
                     table = client.get_table(table_ref)
-                    logging.info("\tTable: %s (%s rows)" % (t.table_id, table.num_rows))
-                    table_list.append(t.table_id)
 
-                    folder_table = folder_dataset + '/' + t.table_id
+                    logging.info("\tTable: %s" % t[0])
+                    table_list.append(t[0])
+
+                    folder_table = folder_dataset + '/' + t[0]
                     if not os.path.exists(folder_table):
                         os.makedirs(folder_table)
 
                     table_obj = {
-                        "table": t.table_id,
+                        "table": t[0],
                         "schema": [],
                     }
                     schema = list(table.schema)

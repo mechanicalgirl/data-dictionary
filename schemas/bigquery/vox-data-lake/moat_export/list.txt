@@ -1,4 +1,0 @@
-vox_display_hourly
-vox_display_hourly_test
-vox_video_hourly
-vox_video_hourly_test

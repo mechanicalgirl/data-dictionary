@@ -1,9 +1,0 @@
-article_iab_category
-articles
-articles_apr_2018
-articles_jun_2019
-phonograph_user_host_pageviews
-recommender_user_item_sbnation
-site_overlap_user_item
-test
-verto_audience_2018

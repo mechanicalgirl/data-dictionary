@@ -1,7 +1,0 @@
-alternative_views
-alternatives
-experiment_tags
-experiments
-organizations
-sites
-slices

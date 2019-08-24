@@ -1,0 +1,3 @@
+apple_news_views
+pageviews
+youtube_views

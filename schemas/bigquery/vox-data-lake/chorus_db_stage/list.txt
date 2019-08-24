@@ -1,0 +1,3 @@
+apple_news_articles
+entries
+tweets

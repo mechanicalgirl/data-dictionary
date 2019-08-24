@@ -1,0 +1,3 @@
+ga_sessions
+ga_sessions_intraday
+metrics_summary_story_day_2015

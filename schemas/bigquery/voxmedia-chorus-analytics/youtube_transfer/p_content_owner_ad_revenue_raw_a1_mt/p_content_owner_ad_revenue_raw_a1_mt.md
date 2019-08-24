@@ -1,0 +1,90 @@
+Table: p_content_owner_ad_revenue_raw_a1_mt
+===========================================
+
+Name: adjustment_type
+Type: STRING
+
+Name: date
+Type: STRING
+
+Name: country_code
+Type: STRING
+
+Name: asset_id
+Type: STRING
+
+Name: asset_title
+Type: STRING
+
+Name: asset_labels
+Type: STRING
+
+Name: asset_channel_id
+Type: STRING
+
+Name: asset_type
+Type: STRING
+
+Name: custom_id
+Type: STRING
+
+Name: owned_views
+Type: INTEGER
+
+Name: youtube_revenue_split_auction
+Type: FLOAT
+
+Name: youtube_revenue_split_reserved
+Type: FLOAT
+
+Name: youtube_revenue_split_partner_sold_youtube_served
+Type: FLOAT
+
+Name: youtube_revenue_split_partner_sold_partner_served
+Type: FLOAT
+
+Name: youtube_revenue_split
+Type: FLOAT
+
+Name: partner_revenue_auction
+Type: FLOAT
+
+Name: partner_revenue_reserved
+Type: FLOAT
+
+Name: partner_revenue_partner_sold_youtube_served
+Type: FLOAT
+
+Name: partner_revenue_partner_sold_partner_served
+Type: FLOAT
+
+Name: partner_revenue
+Type: FLOAT
+
+Name: video_id
+Type: STRING
+
+Name: video_title
+Type: STRING
+
+Name: video_duration_sec
+Type: INTEGER
+
+Name: category
+Type: STRING
+
+Name: channel_id
+Type: STRING
+
+Name: uploader
+Type: STRING
+
+Name: channel_display_name
+Type: STRING
+
+Name: content_type
+Type: STRING
+
+Name: policy
+Type: STRING
+

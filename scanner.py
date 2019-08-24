@@ -99,6 +99,19 @@ def traverse_bigquery():
     datasets = list(client.list_datasets())
     project = client.project
 
+    folder_project = 'schemas/bigquery/' + project
+    if os.path.exists(folder_project):
+        for root, dirs, files in os.walk(folder_project, topdown=False):
+            for name in files:
+                logging.info("Clearing file: %s" % name)
+                os.remove(os.path.join(root, name))
+            for name in dirs:
+                logging.info("Clearing folder: %s" % name)
+                os.rmdir(os.path.join(root, name))
+        logging.info("Clearing folder: %s" % folder_project)
+        os.rmdir(folder_project)
+    os.makedirs(folder_project)
+
     # if the list file exists, open and read
     # if project name is in it, close and continue
     # if project name is not in it, append and close
@@ -113,21 +126,8 @@ def traverse_bigquery():
                     f.write(project + "\n")
     else:
         # if the list file doesn't exist, create it
-        with open(filename, 'w+') as f:
-            f.write(project + "\n")
-
-    folder_project = 'schemas/bigquery/' + project
-    if os.path.exists(folder_project):
-        for root, dirs, files in os.walk(folder_project, topdown=False):
-            for name in files:
-                logging.info("Clearing file: %s" % name)
-                os.remove(os.path.join(root, name))
-            for name in dirs:
-                logging.info("Clearing folder: %s" % name)
-                os.rmdir(os.path.join(root, name))
-        logging.info("Clearing folder: %s" % folder_project)
-        os.rmdir(folder_project)
-    os.makedirs(folder_project)
+        f = open(filename, 'w+')
+        f.write(project + "\n")
 
     dataset_list = []
     if datasets:

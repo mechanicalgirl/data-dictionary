@@ -1,2 +1,4 @@
-config/config.json
-creds/creds_*.json
+app/config/config.json
+app/creds/creds_*.json
+venv
+schemas/

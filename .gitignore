@@ -1,4 +1,5 @@
-app/config/config.json
-app/creds/creds_*.json
+scanner/config/config.py
+scanner/creds/creds_*.json
 venv
 schemas/
+*.pyc

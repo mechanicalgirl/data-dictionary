@@ -16,7 +16,5 @@ pip3 install -r requirements.txt
 To run the Flask app:
 
 ```
-python3 main.py
+python3 run.py
 ```
-
-

@@ -1,0 +1,95 @@
+{
+    "project": "voxmedia.com:phrasal-alpha-839",
+    "dataset": "chorus_analytics_91986438",
+    "tables": [
+        {
+            "table": "metrics_summary_story_day",
+            "schema": [
+                {
+                    "name": "chorus_id",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "timeslot_day",
+                    "type": "TIMESTAMP",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "bounces",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "exits",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "authed_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "total_share_events",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
+}

@@ -6,6 +6,7 @@
 # python3 scanner.py --platform postgresql
 
 import argparse
+import json
 import logging
 import os
 import re
@@ -20,7 +21,7 @@ from config.config import CONFIG
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
 
-root_dir = "../schemas"
+root_dir = "schemas"
 
 def traverse_postgresql():
     project = 'chorus_analytics'
@@ -68,6 +69,10 @@ def traverse_postgresql():
     result = engine.execute(text(LIST_TABLES))
     tables = result.fetchall()
 
+    project_obj = {
+        "dataset": project,
+        "tables": []
+    }
     table_list = []
     for t in tables:
         table = t[0]
@@ -88,10 +93,10 @@ def traverse_postgresql():
                 'name': s[0],
                 'type': s[1],
             })
-        write_file('table', folder_project, table_obj)
+        project_obj['tables'].append(table_obj)
 
+    write_file('table', folder_project, project_obj)
     write_file('list', folder_project, table_list)
-
 
 def traverse_bigquery():
     client = bigquery.Client()
@@ -160,6 +165,11 @@ def traverse_bigquery():
                     os.makedirs(folder_dataset)
                 dataset_list.append(dataset_id)
 
+                dataset_obj = {
+                    "project": project,
+                    "dataset": dataset_id,
+                    "tables": []
+                }
                 table_list = []
                 for t in table_objs:
                     table_ref = dataset_ref.table(t[1].table_id)
@@ -181,8 +191,11 @@ def traverse_bigquery():
                             'is_nullable': s.is_nullable,
                             'mode': s.mode
                         })
-                    write_file('table', folder_dataset, table_obj)
+                    dataset_obj['tables'].append(table_obj)
+
+                write_file('table', folder_dataset, dataset_obj)
                 write_file('list', folder_dataset, table_list)
+
             else:
                 logging.info("This dataset does not contain any tables.")
     else:
@@ -193,37 +206,21 @@ def traverse_bigquery():
 
 def write_file(type, path, body):
     if type == 'list':
-        """
-        postgresql - page that lists: chorus_analytics
-            chorus_analytics: page that lists all tables
-        bigquery - page that lists: voxmedia-chorus-analytics, voxmedia.com:phrasal-alpha-839
-            in each project: page that lists all datasets
-                in each dataset: page that lists all tables
-        """
         filename = path + '/list.txt'
-
         file_str = ''
         for b in body:
             file_str += b+"\n"
+        with open(filename, 'w+') as f:
+            f.write(file_str)
 
     elif type == 'table':
-        filename = path + '/' + body['table'] + '.md'
-
-        table_label = 'Table: ' + path.split('/')[-1]
-        table_underline = '=' * len(table_label)
-
-        file_str = table_label + "\n"
-        file_str += table_underline + "\n\n"
-        for b in body['schema']:
-            file_str += "Name: " + b['name'] + "\n"
-            file_str += "Type: " + b['type'] + "\n\n"
+        filename = path + '/' + body['dataset'] + '.json'
+        with open(filename, 'w') as f:
+            json.dump(body, f, indent=4)
 
     else:
         sys.exit()
 
-    # always create the file as a new file
-    with open(filename, 'w+') as f:
-        f.write(file_str)
     logging.info("\t\tFile: %s" % filename)
 
 

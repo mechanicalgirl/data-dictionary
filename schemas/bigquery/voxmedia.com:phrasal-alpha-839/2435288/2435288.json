@@ -1,0 +1,217 @@
+{
+    "project": "voxmedia.com:phrasal-alpha-839",
+    "dataset": "2435288",
+    "tables": [
+        {
+            "table": "ga_sessions",
+            "schema": [
+                {
+                    "name": "visitorId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitNumber",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitStartTime",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "totals",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "trafficSource",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "device",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "geoNetwork",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "customDimensions",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "hits",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "fullVisitorId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        },
+        {
+            "table": "ga_sessions_intraday",
+            "schema": [
+                {
+                    "name": "visitorId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitNumber",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitStartTime",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "totals",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "trafficSource",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "device",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "geoNetwork",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "customDimensions",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "hits",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "fullVisitorId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        },
+        {
+            "table": "queryview",
+            "schema": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "chorus_id",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
+}

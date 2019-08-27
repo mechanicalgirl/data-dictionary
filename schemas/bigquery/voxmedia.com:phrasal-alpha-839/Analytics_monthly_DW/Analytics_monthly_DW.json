@@ -1,0 +1,67 @@
+{
+    "project": "voxmedia.com:phrasal-alpha-839",
+    "dataset": "Analytics_monthly_DW",
+    "tables": [
+        {
+            "table": "networks",
+            "schema": [
+                {
+                    "name": "Month",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "m_d_yyyy",
+                    "type": "DATE",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Network",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Platform",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Metric",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Value",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Metric_Segment",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "Network_Segment",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
+}

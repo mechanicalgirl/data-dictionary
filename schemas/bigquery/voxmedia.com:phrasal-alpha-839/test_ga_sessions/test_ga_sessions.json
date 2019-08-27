@@ -1,0 +1,301 @@
+{
+    "project": "voxmedia.com:phrasal-alpha-839",
+    "dataset": "test_ga_sessions",
+    "tables": [
+        {
+            "table": "80041901_ga_sessions",
+            "schema": [
+                {
+                    "name": "visitorId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitNumber",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitId",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "visitStartTime",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "totals",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "trafficSource",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "device",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "geoNetwork",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "customDimensions",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "hits",
+                    "type": "RECORD",
+                    "description": null,
+                    "is_nullable": false,
+                    "mode": "REPEATED"
+                },
+                {
+                    "name": "fullVisitorId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "clientId",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "channelGrouping",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "socialEngagementType",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        },
+        {
+            "table": "80041901_metrics_summary_story_day",
+            "schema": [
+                {
+                    "name": "chorus_id",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "timeslot_day",
+                    "type": "TIMESTAMP",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "bounces",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "exits",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "authed_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "total_share_events",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        },
+        {
+            "table": "example_summary_test",
+            "schema": [
+                {
+                    "name": "chorus_id",
+                    "type": "STRING",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "timeslot_day",
+                    "type": "TIMESTAMP",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "bounces",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "exits",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "authed_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "total_share_events",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_entrances",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "facebook_ia_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                },
+                {
+                    "name": "google_amp_pageviews",
+                    "type": "INTEGER",
+                    "description": null,
+                    "is_nullable": true,
+                    "mode": "NULLABLE"
+                }
+            ]
+        }
+    ]
+}

@@ -1,4 +1,3 @@
-scanner/config/config.py
-scanner/creds/creds_*.json
+config/*.json
 venv
 *.pyc

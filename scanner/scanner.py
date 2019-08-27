@@ -14,10 +14,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import text
 
-from config.config import CONFIG
-
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
-
+env = os.environ.get('ENV', 'staging')
 root_dir = "schemas"
 
 def traverse_postgresql():
@@ -55,8 +53,12 @@ def traverse_postgresql():
     WHERE table_name = '{}'
     """
 
-    ENV = os.environ.get('ENV', 'staging')
-    pgdb = CONFIG[ENV]['postgres_db']
+    config_path = os.environ['CONFIG_PATH']
+    print(config_path)
+    print(open(config_path).read())
+    config = json.loads(open(config_path).read())
+    print(config)
+    pgdb = config[env]['postgres_db']
     engine = create_engine(pgdb, client_encoding='utf8', echo=False, pool_size=20, max_overflow=100)
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
@@ -257,7 +259,11 @@ if __name__ == '__main__':
                 logging.warning("GOOGLE_APPLICATION_CREDENTIALS is not set")
                 sys.exit(125)
         else:
-            traverse_postgresql()
+            if os.environ.get('CONFIG_PATH'):
+                traverse_postgresql()
+            else:
+                logging.warning("CONFIG_PATH is not set")
+                sys.exit(125)
     else:
         logging.warning("Platform not defined")
         sys.exit(125)

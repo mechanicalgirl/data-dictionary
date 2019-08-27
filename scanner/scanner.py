@@ -54,10 +54,7 @@ def traverse_postgresql():
     """
 
     config_path = os.environ['CONFIG_PATH']
-    print(config_path)
-    print(open(config_path).read())
     config = json.loads(open(config_path).read())
-    print(config)
     pgdb = config[env]['postgres_db']
     engine = create_engine(pgdb, client_encoding='utf8', echo=False, pool_size=20, max_overflow=100)
     Session = sessionmaker(bind=engine)

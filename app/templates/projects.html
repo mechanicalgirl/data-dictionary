@@ -1,22 +1,21 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Datasets in: {{ database }}:{{ project }}
+  Projects in: {{ database }}
 {% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block nav %}
   <a href="/">Home</a>
-  >> <a href="/db/{{ database }}/">{{ database }}</a>
-  >> {{ project }}
+  >> {{ database }}
 {% endblock %}
 
 {% block content %}
-  <h3>Datasets in: {{ database }}:{{ project }}</h3>
+  <h3>Projects in: {{ database }}</h3>
   <ul>
     {% for link in links %}
-      <li><a href="/db/{{ database }}/project/{{ project }}/dataset/{{ link }}/">{{ link }}</a></li>
+      <li><a href="/db/{{ database }}/project/{{ link }}/">{{ link }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

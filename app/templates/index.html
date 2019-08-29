@@ -1,11 +1,28 @@
-<html>
-  <head>
-    <title>Home - Table of Contents</title>
-  </head>
-  <body>
-    <h1>Home - Table of Contents</h1>
-    <ul>
-      <li><a href="/database/postgresql/">PostgreSQL</a></li>
-      <li><a href="/database/bigquery/">BigQuery</a></li>
-  </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %}{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block content %}
+  <table width='60%'>
+    <tr valign="top">
+      <td>
+
+        <h4>Search:</h4>
+        <form action="<!-- url -->" method="post">
+          <input type="text" name="search_term" />
+          <!-- csrf_token -->
+        </form>
+
+      </td>
+      <td>
+        <h4>Browse:</h4>
+        <a href="/browse/">Databases</a>
+      </td>
+    </tr>
+  </table>
+{% endblock %}
+
+{% block footer %}{% endblock %}

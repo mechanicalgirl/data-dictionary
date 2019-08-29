@@ -1,8 +1,35 @@
-<html>
-  <head>
-    <title>Read Page</title>
-  </head>
-  <body>
-    {{ content }}
-  </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+  Table in: {{ db_name }}:{{ project_name }}:{{ dataset_name }}
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block nav %}
+  <a href="/">Home</a>
+  >> <a href="/db/{{ db_name }}/">{{ db_name }}</a>
+  >> <a href="/db/{{ db_name }}/project/{{ project_name }}/">{{ project_name }}</a>
+  >> <a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/">{{ dataset_name }}</a>
+  >> {{ table_name }}
+{% endblock %}
+
+{% block content %}
+  <h3>Table: {{ table_name }}</h3>
+  <table cellpadding=0 cellspacing=5>
+    <tr>
+      <td><strong>Column Name</strong></td>
+      <td>&nbsp;&nbsp;&nbsp;</td>
+      <td><strong>Column Type</strong></td>
+    </tr>
+    {% for s in content['schema'] %}
+      <tr>
+        <td>{{ s['name'] }}</td>
+        <td></td>
+        <td>{{ s['type'] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
+
+{% block footer %}{% endblock %}

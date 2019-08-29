@@ -1,14 +1,25 @@
-<html>
-  <head>
-    <title>
-      Tables in: {{ database }}:{{ project }}{% if dataset %}:{{ dataset }}{% endif %}
-  </title>
-  </head>
-  <body>
-    <h1>Tables in: {{ database }}:{{ project }}{% if dataset %}:{{ dataset }}{% endif %}</h1>
-    <ul>
-      {% for link in links %}
-        <li><a href="/{{ database }}/project/{{ project }}/{% if dataset %}dataset/{{ dataset }}/{% endif %}table/{{ link['link'] }}/">{{ link['label'] }}</a></li>
-      {% endfor %}
-  </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+  Tables in: {{ database }}:{{ project }}:{{ dataset }}
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block nav %}
+  <a href="/">Home</a>
+  >> <a href="/db/{{ database }}/">{{ database }}</a>
+  >> <a href="/db/{{ database }}/project/{{ project }}/">{{ project }}</a>
+  >> {{ dataset }}</a>
+{% endblock %}
+
+{% block content %}
+  <h3>Tables in: {{ database }}:{{ project }}:{{ dataset }}</h3>
+  <ul>
+    {% for link in links %}
+      <li><a href="/db/{{ database }}/project/{{ project }}/dataset/{{ dataset }}/table/{{ link }}">{{ link }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+{% block footer %}{% endblock %}

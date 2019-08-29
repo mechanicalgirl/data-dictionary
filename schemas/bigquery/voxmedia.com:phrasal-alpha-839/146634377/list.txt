@@ -1,3 +1,0 @@
-ga_realtime_sessions
-ga_realtime_sessions_view
-ga_sessions

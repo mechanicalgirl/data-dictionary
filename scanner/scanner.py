@@ -16,7 +16,7 @@ from sqlalchemy.sql import text
 
 logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
 env = os.environ.get('ENV', 'staging')
-root_dir = "schemas"
+root_dir = os.environ['WRITE_PATH'] if 'WRITE_PATH' in os.environ else 'schemas'
 
 def traverse_postgresql():
     project = 'chorus_analytics'

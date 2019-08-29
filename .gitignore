@@ -1,3 +1,5 @@
 config/*.json
+schemas/bigquery
 venv
 *.pyc
+app/__pycache__/views.cpython-37.pyc

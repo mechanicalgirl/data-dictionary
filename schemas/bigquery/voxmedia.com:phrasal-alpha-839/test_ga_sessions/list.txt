@@ -1,3 +1,0 @@
-80041901_ga_sessions
-80041901_metrics_summary_story_day
-example_summary_test

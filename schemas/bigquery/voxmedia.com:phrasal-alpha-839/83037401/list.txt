@@ -1,3 +1,0 @@
-ga_sessions
-ga_sessions_intraday
-top100

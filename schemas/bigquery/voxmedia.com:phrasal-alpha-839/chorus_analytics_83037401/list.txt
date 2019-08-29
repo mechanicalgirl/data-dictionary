@@ -1,5 +1,0 @@
-metrics_summary_all_hour
-metrics_summary_all_ten_minute
-metrics_summary_story_day
-metrics_summary_story_hour
-metrics_summary_story_ten_minute

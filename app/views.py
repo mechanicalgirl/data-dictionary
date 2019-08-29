@@ -1,3 +1,4 @@
+import json
 import markdown
 import os
 import sys
@@ -7,106 +8,82 @@ from app import app
 from flask import render_template
 from flask import Markup
 
-def walk(top, maxdepth):
-    dirs, nondirs = [], []
-    for name in os.listdir(top):
-        (dirs if os.path.isdir(os.path.join(top, name)) else nondirs).append(name)
-    yield top, dirs, nondirs
-    if maxdepth > 1:
-        for name in dirs:
-            for x, y, z in walk(os.path.join(top, name), maxdepth-1):
-                yield x
+root_dir = os.environ['WRITE_PATH'] if 'WRITE_PATH' in os.environ else 'schemas'
 
 @app.route("/", methods=['GET'])
 def index():
+    return render_template('index.html')
+
+@app.route("/browse/", methods=['GET'])
+def browse():
     """
     This is a hardcoded index page that just
     links to the Postgresql and BigQuery sections.
     """
-    return render_template('index.html')
+    return render_template('browse.html')
 
-@app.route("/database/<string:db_name>/")
-def list_databases(db_name):
+@app.route("/", methods=['GET', 'POST'])
+def search(search_term):
+    pass
+    return None
+
+@app.route("/db/<string:db_name>/", methods=['GET'])
+def list_projects(db_name):
     """
-    Postgresql - list the chorus_analytics database
+    Postgresql - list the chorus_analytics database as a project
     Bigquery - list all the project names
     """
     links = []
-    list_file = 'schemas/%s/list.txt' % db_name
+    list_file = '%s/%s/projects.json' % (root_dir, db_name)
     f = open(list_file, 'r', encoding='utf-8')
-    for line in f:
-        links.append({"link": line, "label": line}) 
-    return render_template('databases.html', database=db_name, links=links)
+    data = json.load(f)
+    for d in data['projects']:
+        links.append(d) 
+    return render_template('projects.html', database=db_name, links=links)
 
-@app.route("/<string:db_name>/project/<string:project_name>/")
+@app.route("/db/<string:db_name>/project/<string:project_name>/", methods=['GET'])
 def list_datasets(db_name, project_name):
     """
-    Postgresql - list the tables in the chorus_analytics database
+    Postgresql - list chorus_analytics as a dataset
     Bigquery - list all the datasets in the project
     """
-    if db_name == 'postgresql':
-        # generate 'page' links with the table names
-        template = 'tables.html'
-    else:
-        # generate another set of links listing the datasets
-        template = 'datasets.html'
-
     links = []
-    list_file = 'schemas/%s/%s/list.txt' % (db_name, project_name)
+    list_file = '%s/%s/%s/datasets.json' % (root_dir, db_name, project_name)
     f = open(list_file, 'r', encoding='utf-8')
-    for line in f:
-        links.append({"link": line, "label": line})        
-    return render_template(template, database=db_name, project=project_name, links=links)
+    data = json.load(f)
+    for d in data['datasets']:
+        links.append(d)                              
+    return render_template('datasets.html', database=db_name, project=project_name, links=links)
 
-@app.route("/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/")
-def list_tables_in_dataset(db_name, project_name, dataset_name):
+@app.route("/db/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/", methods=['GET'])
+def list_tables(db_name, project_name, dataset_name):
     """
-    Bigquery - list all the tables in the dataset and link to them
+    list all the tables in the dataset and link to them
     """
-    if db_name == 'bigquery':
-        # generate 'page' links with the table names
-        template = 'tables.html'
+    links = []
+    list_file = '%s/%s/%s/%s/tables.json' % (root_dir, db_name, project_name, dataset_name)
+    f = open(list_file, 'r', encoding='utf-8')
+    data = json.load(f)
+    for d in data['tables']:
+        links.append(d['table'])
+    return render_template('tables.html', database=db_name, project=project_name, dataset=dataset_name, links=links)
 
-        links = []
-        list_file = 'schemas/%s/%s/%s/list.txt' % (db_name, project_name, dataset_name)
-        f = open(list_file, 'r', encoding='utf-8')
-        for line in f:
-            links.append({"link": line, "label": line})
-        return render_template(template, database=db_name, project=project_name, dataset=dataset_name, links=links)
-
-@app.route("/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/")
-@app.route("/<string:db_name>/project/<string:project_name>/table/<string:table_name>/")
-def read_page(db_name, project_name, table_name, dataset_name=None):
+@app.route("/db/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/", methods=['GET'])
+def read_page(db_name, project_name, dataset_name, table_name):
     """
-    - use the incoming page name to locate and open a markdown file
-    - use the body of that file as 'content'
-    - port that out to the read.html template
     """
-    if db_name == 'postgresql':
-        table_file = 'schemas/%s/%s/%s.md' % (db_name, project_name, table_name)
-    elif db_name == 'bigquery':
-        table_file = 'schemas/%s/%s/%s/%s.md' % (db_name, project_name, dataset_name, table_name)
-
+    tables_file = '%s/%s/%s/%s/tables.json' % (root_dir, db_name, project_name, dataset_name)
     content = ''
-    with open(table_file, 'r') as content_file:
-        content = content_file.read()
-    content = Markup(markdown.markdown(content))
-    return render_template('read.md', **locals())
+    f = open(tables_file, 'r', encoding='utf-8')
+    data = json.load(f)
+    for d in data['tables']:
+        if d['table'] == table_name:
+            content = d
+    return render_template('read.html', **locals())
 
-@app.route("/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/edit")
+@app.route("/db/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/edit", methods=['GET'])
 def edit_page(db_name, project_name, dataset_name, table_name):
     """
-    - use the incoming page name to locate and open a markdown file
-    - use the body of that file as 'content'
-    - port that out to the edit.html template
+    still TBD
     """
-    if db_name == 'postgresql':
-        table_file = 'schemas/%s/%s/%s.md' % (db_name, project_name, table_name)
-    elif db_name == 'bigquery':
-        table_file = 'schemas/%s/%s/%s/%s.md' % (db_name, project_name, dataset_name, table_name)
-
-    content = ''
-    with open(table_file, 'r') as content_file:
-        content = content_file.read()
-    content = Markup(markdown.markdown(content))
     return render_template('edit.html', **locals())

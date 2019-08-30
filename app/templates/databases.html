@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <title>Projects in: {{ database }}</title>
+  </head>
+  <body>
+    <ul>
+      {% for link in links %}
+        <li><a href="/{{ database }}/project/{{ link['link'] }}/">{{ link['label'] }}</a></li>
+      {% endfor %}
+  </body>
+</html>

@@ -7,29 +7,43 @@
 {% block header %}{% endblock %}
 
 {% block nav %}
-  <a href="/">Home</a>
-  >> <a href="/db/{{ db_name }}/">{{ db_name }}</a>
-  >> <a href="/db/{{ db_name }}/project/{{ project_name }}/">{{ project_name }}</a>
-  >> <a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/">{{ dataset_name }}</a>
-  >> {{ table_name }}
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ db_name }}/">{{ db_name }}</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ db_name }}/project/{{ project_name }}/">{{ project_name }}</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/">{{ dataset_name }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ table_name }}</li>
 {% endblock %}
 
 {% block content %}
-  <h3>Table: {{ table_name }}</h3>
-  <table cellpadding=0 cellspacing=5>
+
+  <dl>
+    <dt>{{ table_name }}</dt>
+    <dd>(table description)</dd>
+  </dl>
+
+  <table class="table">
+  <thead>
     <tr>
-      <td><strong>Column Name</strong></td>
-      <td>&nbsp;&nbsp;&nbsp;</td>
-      <td><strong>Column Type</strong></td>
+      <th scope="col">Column Name</th>
+      <th scope="col">Column Type</th>
+      <th scope="col">Description</th>
+      <th scope="col">Is Nullable</th>
+      <th scope="col">Mode</th>
     </tr>
+  </thead>
+  <tbody>
     {% for s in content['schema'] %}
-      <tr>
-        <td>{{ s['name'] }}</td>
-        <td></td>
-        <td>{{ s['type'] }}</td>
-      </tr>
+    <tr>
+      <td>{{ s['name'] }}</td>
+      <td>{{ s['type'] }}</td>
+      <td>{{ s['description'] }}</td>
+      <td>{{ s['is_nullable'] }}</td>
+      <td>{{ s['mode'] }}</td>
+    </tr>
     {% endfor %}
+  </tbody>
   </table>
+
 {% endblock %}
 
 {% block footer %}{% endblock %}

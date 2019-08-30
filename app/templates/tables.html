@@ -7,14 +7,13 @@
 {% block header %}{% endblock %}
 
 {% block nav %}
-  <a href="/">Home</a>
-  >> <a href="/db/{{ database }}/">{{ database }}</a>
-  >> <a href="/db/{{ database }}/project/{{ project }}/">{{ project }}</a>
-  >> {{ dataset }}</a>
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ database }}/">{{ database }}</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ database }}/project/{{ project }}/">{{ project }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ dataset }}</li>
 {% endblock %}
 
 {% block content %}
-  <h3>Tables in: {{ database }}:{{ project }}:{{ dataset }}</h3>
   <ul>
     {% for link in links %}
       <li><a href="/db/{{ database }}/project/{{ project }}/dataset/{{ dataset }}/table/{{ link }}">{{ link }}</a></li>

@@ -7,12 +7,11 @@
 {% block header %}{% endblock %}
 
 {% block nav %}
-  <a href="/">Home</a>
-  >> {{ database }}
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ database }}</li>
 {% endblock %}
 
 {% block content %}
-  <h3>Projects in: {{ database }}</h3>
   <ul>
     {% for link in links %}
       <li><a href="/db/{{ database }}/project/{{ link }}/">{{ link }}</a></li>

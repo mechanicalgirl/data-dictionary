@@ -14,18 +14,10 @@ root_dir = os.environ['WRITE_PATH'] if 'WRITE_PATH' in os.environ else 'schemas'
 def index():
     return render_template('index.html')
 
-@app.route("/browse/", methods=['GET'])
-def browse():
-    """
-    This is a hardcoded index page that just
-    links to the Postgresql and BigQuery sections.
-    """
-    return render_template('browse.html')
-
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/search/<string:search_term>/", methods=['GET', 'POST'])
 def search(search_term):
     pass
-    return None
+    return render_template('index.html')
 
 @app.route("/db/<string:db_name>/", methods=['GET'])
 def list_projects(db_name):
@@ -79,6 +71,14 @@ def read_page(db_name, project_name, dataset_name, table_name):
     for d in data['tables']:
         if d['table'] == table_name:
             content = d
+            for s in d['schema']:
+                if "description" not in s:
+                    s["description"] = ''
+                if "is_nullable" not in s:
+                    s["is_nullable"] = ''
+                if "mode" not in s:
+                    s["mode"] = ''
+            print(d)
     return render_template('read.html', **locals())
 
 @app.route("/db/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/edit", methods=['GET'])

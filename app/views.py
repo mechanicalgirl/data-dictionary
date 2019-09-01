@@ -16,7 +16,7 @@ def text_search(search_term):
     results = []
 
     table_files = []
-    for root, dirs, files in os.walk("schemas", topdown=False):
+    for root, dirs, files in os.walk(root_dir, topdown=False):
         for name in files:
             file_path = os.path.join(root, name)
             if file_path.split('/')[-1] == 'tables.json':

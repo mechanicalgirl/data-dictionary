@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block nav %}
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+{% endblock %}
+
+{% block content %}
+
+  {% if results %}
+    {% for r in results %}
+      <p>
+        <strong>{{ r['type'].title() }}</strong>: <a href="{{ r['url'] }}">{{ r['name'] }}</a><br>
+      </p>
+    {% endfor %}
+  {% else %}
+    No results for <strong>{{ search_term }}</strong>.
+  {% endif %}
+{% endblock %}
+
+{% block footer %}{% endblock %}

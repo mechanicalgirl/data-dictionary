@@ -1,22 +1,22 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Tables in: {{ database }}:{{ project }}:{{ dataset }}
+  Tables in: {{ db_name}}:{{ project_name }}:{{ dataset_name }}
 {% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block nav %}
   <li class="breadcrumb-item"><a href="/">Home</a></li>
-  <li class="breadcrumb-item"><a href="/db/{{ database }}/">{{ database }}</a></li>
-  <li class="breadcrumb-item"><a href="/db/{{ database }}/project/{{ project }}/">{{ project }}</a></li>
-  <li class="breadcrumb-item active" aria-current="page">{{ dataset }}</li>
+  <li class="breadcrumb-item"><a href="/db/{{ db_name }}/">{{ db_name }}</a></li>
+  <li class="breadcrumb-item"><a href="/db/{{ db_name }}/project/{{ project_name }}/">{{ project_name }}</a></li>
+  <li class="breadcrumb-item active" aria-current="page">{{ dataset_name }}</li>
 {% endblock %}
 
 {% block content %}
   <ul>
     {% for link in links %}
-      <li><a href="/db/{{ database }}/project/{{ project }}/dataset/{{ dataset }}/table/{{ link }}">{{ link }}</a></li>
+      <li><a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/table/{{ link }}">{{ link }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>Projects in: {{ database }}</title>
+    <title>Projects in: {{ db_name }}</title>
   </head>
   <body>
     <ul>
       {% for link in links %}
-        <li><a href="/{{ database }}/project/{{ link['link'] }}/">{{ link['label'] }}</a></li>
+        <li><a href="/{{ db_name }}/project/{{ link['link'] }}/">{{ link['label'] }}</a></li>
       {% endfor %}
   </body>
 </html>

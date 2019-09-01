@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  Projects in: {{ database }}
+  Projects in: {{ db_name }}
 {% endblock %}
 
 {% block header %}{% endblock %}
 
 {% block nav %}
   <li class="breadcrumb-item"><a href="/">Home</a></li>
-  <li class="breadcrumb-item active" aria-current="page">{{ database }}</li>
+  <li class="breadcrumb-item active" aria-current="page">{{ db_name }}</li>
 {% endblock %}
 
 {% block content %}
   <ul>
     {% for link in links %}
-      <li><a href="/db/{{ database }}/project/{{ link }}/">{{ link }}</a></li>
+      <li><a href="/db/{{ db_name }}/project/{{ link }}/">{{ link }}</a></li>
     {% endfor %}
   </ul>
 {% endblock %}

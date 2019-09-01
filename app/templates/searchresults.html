@@ -13,9 +13,28 @@
 
   {% if results %}
     {% for r in results %}
-      <p>
-        <strong>{{ r['type'].title() }}</strong>: <a href="{{ r['url'] }}">{{ r['name'] }}</a><br>
-      </p>
+
+      <!--
+      <div class="media">
+        <i class="fas fa-{{ r['icon'] }}" title="{{ r['type'].title() }}"></i>
+        <div class="media-body">
+          <h5 class="mt-0"><a href="{{ r['url'] }}">{{ r['name'] }}</a></h5>
+          {{ r['description'] }}
+        </div>
+      </div>
+      <br>
+      -->
+
+      <!-- <strong>{{ r['type'].title() }}</strong> -->
+      <div class="float-left mr-5 mb-5">
+        <i class="fas fa-{{ r['icon'] }}" data-toggle="tooltip" title="{{ r['type'].title() }}" alt="{{ r['type'].title() }}"></i>
+      </div>
+      <dl>
+        <dt><a href="{{ r['url'] }}">{{ r['name'] }}</a></dt>
+        <dd>{{ r['description'] }}</dd>
+      </dl>
+      <div class="clearfix"></div>
+
     {% endfor %}
   {% else %}
     No results for <strong>{{ search_term }}</strong>.

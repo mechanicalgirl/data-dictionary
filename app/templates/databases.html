@@ -3,9 +3,12 @@
     <title>Projects in: {{ db_name }}</title>
   </head>
   <body>
-    <ul>
+    <ul class="fa-ul">
       {% for link in links %}
-        <li><a href="/{{ db_name }}/project/{{ link['link'] }}/">{{ link['label'] }}</a></li>
+        <li><span class="fa-li"><i class="fas fa-server" alt="Project"></i></span>
+            <a href="/{{ db_name }}/project/{{ link['link'] }}/">{{ link['label'] }}</a>
+        </li>
       {% endfor %}
+    </ul>
   </body>
 </html>

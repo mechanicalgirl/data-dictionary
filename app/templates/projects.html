@@ -12,9 +12,12 @@
 {% endblock %}
 
 {% block content %}
-  <ul>
+  <ul class="fa-ul">
     {% for link in links %}
-      <li><a href="/db/{{ db_name }}/project/{{ link }}/">{{ link }}</a></li>
+      <li>
+        <span class="fa-li"><i class="fas fa-server" alt="Project"></i></span>
+        <a href="/db/{{ db_name }}/project/{{ link }}/">{{ link }}</a>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

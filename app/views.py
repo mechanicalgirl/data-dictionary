@@ -33,7 +33,9 @@ def text_search(search_term):
         if lterm in data['project'].lower():
             result = {
                 'type': 'project',
+                'icon': 'server',
                 'name': data['project'],
+                'description': "Project in the '%s' database" % db,
                 'url': '/db/%s/project/%s/' % (db, data['project'])
             }
             results.append(result)
@@ -41,7 +43,9 @@ def text_search(search_term):
         if lterm in data['dataset'].lower():
             result = {
                 'type': 'dataset',
+                'icon': 'database',
                 'name': data['dataset'],
+                'description': "Dataset in the '%s' project" % data['project'],
                 'url': '/db/%s/project/%s/dataset/%s/' % (db, data['project'], data['dataset'])
             }
             results.append(result)
@@ -50,7 +54,9 @@ def text_search(search_term):
             if lterm in t['table'].lower():
                 result = {
                     'type': 'table',
+                    'icon': 'table',
                     'name': t['table'],
+                    'description': "Table in the '%s' dataset" % data['dataset'],
                     'url': '/db/%s/project/%s/dataset/%s/table/%s/' % (db, data['project'], data['dataset'], t['table'])
                 }
                 results.append(result)
@@ -59,14 +65,15 @@ def text_search(search_term):
             for item in t['schema']:
                 if lterm in item['name'].lower():
                     result = {
-                        'type': 'table column',
-                        'name': '%s:%s' % (t['table'], item['name']),
+                        'type': 'column',
+                        'icon': 'columns',
+                        'name': '%s' % item['name'],
+                        'description': "'%s' column in the '%s' table" % (item['type'], t['table']),
                         'url': '/db/%s/project/%s/dataset/%s/table/%s/' % (db, data['project'], data['dataset'], t['table'])
                     }
                     results.append(result)
 
     deduped_results = [dict(t) for t in {tuple(d.items()) for d in results}]
-
     return deduped_results
 
 
@@ -75,13 +82,12 @@ def index():
     form = SearchForm()
     return render_template('index.html', **locals())
 
-@app.route("/search/", methods=['POST'])
+@app.route("/search/", methods=['GET', 'POST'])
 def search():
     form = SearchForm()
     if request.method == 'POST':
         if form.validate() == False:
             flash('Search term is required.')
-            print("NO TERM")
             return redirect(request.referrer)
         else:
             search_term = form.data['term']
@@ -152,7 +158,6 @@ def read_page(db_name, project_name, dataset_name, table_name):
                     s["is_nullable"] = ''
                 if "mode" not in s:
                     s["mode"] = ''
-            print(d)
     return render_template('read.html', **locals())
 
 @app.route("/db/<string:db_name>/project/<string:project_name>/dataset/<string:dataset_name>/table/<string:table_name>/edit", methods=['GET'])

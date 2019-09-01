@@ -14,9 +14,12 @@
 {% endblock %}
 
 {% block content %}
-  <ul>
+  <ul class="fa-ul">
     {% for link in links %}
-      <li><a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/table/{{ link }}">{{ link }}</a></li>
+      <li>
+        <span class="fa-li"><i class="fas fa-table" alt="Table"></i></span>
+        <a href="/db/{{ db_name }}/project/{{ project_name }}/dataset/{{ dataset_name }}/table/{{ link }}">{{ link }}</a>
+      </li>
     {% endfor %}
   </ul>
 {% endblock %}

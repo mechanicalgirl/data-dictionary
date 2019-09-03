@@ -96,6 +96,7 @@ def traverse_postgresql():
 
                     table_obj = {
                         "table": table,
+                        "description": '',
                         "schema": [],
                     }
                     schema = r.fetchall()
@@ -160,6 +161,17 @@ def traverse_bigquery():
             dataset = client.get_dataset(dataset_ref)
             logging.info("Dataset: %s" % dataset_id)
 
+            TABLE_DESCRIPTIONS = """
+            SELECT *
+            FROM {dataset}.INFORMATION_SCHEMA.TABLE_OPTIONS
+            WHERE option_name="description"
+            """
+            query_job = client.query(TABLE_DESCRIPTIONS.format(dataset=d.dataset_id))
+            rows = query_job.result()
+            descriptions = []
+            for row in rows:
+                descriptions.append({"table": row.table_name, "description": row.option_value})
+
             tables = list(client.list_tables(dataset))  # API request(s)
 
             tables_obj = {
@@ -192,8 +204,14 @@ def traverse_bigquery():
                     table = client.get_table(table_ref)
                     logging.info("\tTable: %s" % t[0])
 
+                    table_description = ''
+                    table_descriptions = [d['description'] for d in descriptions if d['table'] == t[0]]
+                    if table_descriptions:
+                        table_description = table_descriptions[0]
+
                     table_obj = {
                         "table": t[0],
+                        "description": table_description,
                         "schema": [],
                     }
                     schema = list(table.schema)
